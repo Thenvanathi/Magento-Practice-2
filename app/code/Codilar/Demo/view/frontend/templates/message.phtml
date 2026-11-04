@@ -1,0 +1,13 @@
+<?php
+/**
+ * View: Displays the message provided by the Block.
+ *
+ * @var \Codilar\Demo\Block\Message $block
+ */
+?>
+
+<!-- Escape output before displaying it in HTML. -->
+<h1><?= $escaper->escapeHtml(__('Welcome to Codilar Demo Module!')) ?></h1>
+
+<!-- Display the business message returned by the Model. -->
+<p><?= $escaper->escapeHtml($block->getMessage()) ?></p>

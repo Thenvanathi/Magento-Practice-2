@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- Handler that writes to var/log/codilar_order_placement.log -->
+    <virtualType name="Codilar\OrderObserver\Logger\Handler" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/codilar_order_placement.log</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- PSR-3 logger that uses only that handler. -->
+    <virtualType name="Codilar\OrderObserver\Logger\Logger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="name" xsi:type="string">codilarOrderPlacement</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="system" xsi:type="object">Codilar\OrderObserver\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Give the observer the dedicated logger instead of the default one. -->
+    <type name="Codilar\OrderObserver\Observer\LogOrderPlacement">
+        <arguments>
+            <argument name="logger" xsi:type="object">Codilar\OrderObserver\Logger\Logger</argument>
+        </arguments>
+    </type>
+
+</config>

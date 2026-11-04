@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- <preference for="Codilar\Demo\Model\Message"
+                type="Codilar\Demo\Model\CustomMessage"/> -->
+
+    <type name="Codilar\Demo\Model\Message">
+    <plugin name="codilar_demo_message_plugin"
+            type="Codilar\Demo\Plugin\MessagePlugin"/>
+</type>
+
+
+</config>

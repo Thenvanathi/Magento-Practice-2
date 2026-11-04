@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- Global scope: applies to REST, GraphQL and any code using the repository. -->
+    <type name="Magento\Catalog\Api\ProductRepositoryInterface">
+        <plugin name="codilar_price_validation_product_save"
+                type="Codilar\PriceValidation\Plugin\ProductPriceValidation"/>
+    </type>
+
+    <!--
+        Admin product form and $product->save() skip the repository and go straight to the
+        resource model, so the same plugin also guards that single save point.
+    -->
+    <type name="Magento\Catalog\Model\ResourceModel\Product">
+        <plugin name="codilar_price_validation_product_resource_save"
+                type="Codilar\PriceValidation\Plugin\ProductPriceValidation"/>
+    </type>
+
+</config>

@@ -1,0 +1,46 @@
+# GraphQL examples for http://magento.local/graphql
+# Run them in the "GraphQL Network Inspector" browser extension, Altair, or Postman. Each block says its headers.
+
+# --- QUERY (read data) -----------------------------------------------------
+# Headers: Content-Type: application/json
+#          Store: default            (store view code; try mens_en, mens_ta, main_ta)
+query StoreInfo {
+  storeConfig {
+    store_code
+    locale
+    base_currency_code
+  }
+}
+
+# --- MUTATION (change data): get a customer token ---------------------------
+# Headers: Content-Type: application/json
+mutation Login {
+  generateCustomerToken(email: "codilar.e2e@example.com", password: "Codilar@12345") {
+    token
+  }
+}
+
+# --- QUERY that needs login (use the token from Login) ----------------------
+# Headers: Content-Type: application/json
+#          Authorization: Bearer <token>
+# Without the Authorization header Magento answers "The current customer isn't authorized."
+query MyOrders {
+  customer {
+    firstname
+    email
+    orders(pageSize: 3) {
+      items {
+        number
+        status
+      }
+    }
+  }
+}
+
+# --- MUTATIONS used by the React checkout (in order) ------------------------
+# createEmptyCart -> addProductsToCart -> setGuestEmailOnCart (guest only) -> setShippingAddressesOnCart
+# -> setBillingAddressOnCart -> setShippingMethodsOnCart -> setPaymentMethodOnCart -> placeOrder
+# India regions use the region code + region_id, e.g. region: "TN", region_id: 599.
+mutation CreateCart {
+  createEmptyCart
+}

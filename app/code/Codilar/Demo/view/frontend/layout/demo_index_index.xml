@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!-- Defines the blocks and template used on /demo/index/index. -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+
+    <body>
+        <!-- Add our custom block to the main content area. -->
+        <referenceContainer name="content">
+            <block class="Codilar\Demo\Block\Message"
+                   name="codilar.demo.message"   
+                   template="Codilar_Demo::message.phtml"/>
+        </referenceContainer>
+    </body>
+
+</page>

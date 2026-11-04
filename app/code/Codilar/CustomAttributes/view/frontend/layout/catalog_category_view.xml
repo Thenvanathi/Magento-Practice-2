@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Codilar_CustomAttributes::css/category-tagline.css"/>
+    </head>
+    <body>
+        <!-- Child of the title block, so the tagline prints inside the centered title area. -->
+        <referenceBlock name="page.main.title">
+            <block class="Magento\Catalog\Block\Category\View"
+                   name="codilar.category.tagline"
+                   template="Codilar_CustomAttributes::category/tagline.phtml"/>
+        </referenceBlock>
+    </body>
+</page>

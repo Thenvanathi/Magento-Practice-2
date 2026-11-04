@@ -1,0 +1,20 @@
+{
+    "codilar_employee": {
+        "column": {
+            "employee_id": true,
+            "first_name": true,
+            "last_name": true,
+            "email": true,
+            "department": true,
+            "created_at": true
+        },
+        "index": {
+            "CODILAR_EMPLOYEE_DEPARTMENT": true,
+            "CODILAR_EMPLOYEE_FIRST_NAME_LAST_NAME_EMAIL_DEPARTMENT": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "CODILAR_EMPLOYEE_EMAIL": true
+        }
+    }
+}

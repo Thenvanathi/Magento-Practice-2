@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<!--
+    Declarative database schema for the Codilar_Demo Magento module.
+
+    Magento reads this file during setup:upgrade and creates the
+    database table defined below when it does not already exist.
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+
+    <!--
+        Define the table that will store form submissions.
+
+        resource="default" uses Magento's default database connection.
+        engine="innodb" specifies the MySQL storage engine.
+    -->
+    <table name="codilar_demo_submission"
+           resource="default"
+           engine="innodb"
+           comment="Codilar Demo Form Submissions">
+
+        <!--
+            Unique identifier for each submission.
+            unsigned="true" disallows negative IDs.
+            identity="true" makes MySQL generate the ID automatically.
+        -->
+        <column xsi:type="int"
+                name="submission_id"
+                padding="10"
+                unsigned="true"
+                nullable="false"
+                identity="true"
+                comment="Submission ID"/>
+
+        <!--
+            Stores the name entered in the form.
+            VARCHAR(255) allows a name up to 255 characters.
+        -->
+        <column xsi:type="varchar"
+                name="name"
+                length="255"
+                nullable="false"
+                comment="Customer Name"/>
+
+        <!--
+            Stores the email address.
+            This column stores text; email validation will be implemented
+            in the form/controller logic in a later phase.
+        -->
+        <column xsi:type="varchar"
+                name="email"
+                length="255"
+                nullable="false"
+                comment="Customer Email"/>
+
+        <!--
+            Stores the message entered by the user.
+            TEXT is suitable for messages longer than a short VARCHAR field.
+        -->
+        <column xsi:type="text"
+                name="message"
+                nullable="false"
+                comment="Customer Message"/>
+
+        <!--
+            Records when the submission is created.
+            MySQL supplies the current timestamp when a row is inserted
+            and no explicit created_at value is provided.
+        -->
+        <column xsi:type="timestamp"
+                name="created_at"
+                nullable="false"
+                default="CURRENT_TIMESTAMP"
+                on_update="false"
+                comment="Creation Time"/>
+
+        <!--
+            Declare submission_id as the table's primary key.
+            A primary key uniquely identifies each saved submission.
+        -->
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="submission_id"/>
+        </constraint>
+
+    </table>
+</schema>

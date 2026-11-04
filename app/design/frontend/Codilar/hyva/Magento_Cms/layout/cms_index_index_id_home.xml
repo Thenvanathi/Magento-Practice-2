@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <!--
+            Handle cms_index_index_id_home loads after cms_page_view, so cms_page already exists and can be removed.
+            Replaces the database CMS content of the "home" page with our own template.
+        -->
+        <referenceBlock name="cms_page" remove="true"/>
+        <!-- Hyvä demo content added by the parent theme on the homepage. -->
+        <referenceBlock name="hero" remove="true"/>
+        <referenceBlock name="slider-1" remove="true"/>
+        <referenceBlock name="slider-2" remove="true"/>
+        <referenceContainer name="content">
+            <block name="codilar.homepage"
+                   template="Magento_Cms::home/homepage.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

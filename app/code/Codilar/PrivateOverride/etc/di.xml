@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!--
+        Replace the vendor class with our copy of it. The vendor sorting logic lives in a PRIVATE
+        method (Navigation::compare), which a subclass or plugin cannot change, so the whole
+        class is copied into our module and edited there.
+    -->
+    <preference for="Magento\Customer\Block\Account\Navigation"
+                type="Codilar\PrivateOverride\Block\Account\Navigation"/>
+
+</config>

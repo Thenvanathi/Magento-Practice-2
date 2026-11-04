@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Codilar\Employee\Model\ResourceModel\Employee\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">codilar_employee</argument>
+            <argument name="resourceModel" xsi:type="string">Codilar\Employee\Model\ResourceModel\Employee</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="codilar_employee_listing_data_source" xsi:type="string">Codilar\Employee\Model\ResourceModel\Employee\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

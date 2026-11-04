@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="codilar_employee" resource="default" engine="innodb" comment="Codilar Employee">
+        <column xsi:type="int" name="employee_id" unsigned="true" nullable="false" identity="true"
+                comment="Employee ID"/>
+        <column xsi:type="varchar" name="first_name" nullable="false" length="100" comment="First Name"/>
+        <column xsi:type="varchar" name="last_name" nullable="false" length="100" comment="Last Name"/>
+        <column xsi:type="varchar" name="email" nullable="false" length="255" comment="Email"/>
+        <column xsi:type="varchar" name="department" nullable="true" length="100" comment="Department"/>
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="employee_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="CODILAR_EMPLOYEE_EMAIL">
+            <column name="email"/>
+        </constraint>
+        <index referenceId="CODILAR_EMPLOYEE_DEPARTMENT" indexType="btree">
+            <column name="department"/>
+        </index>
+        <index referenceId="CODILAR_EMPLOYEE_FULLTEXT" indexType="fulltext">
+            <column name="first_name"/>
+            <column name="last_name"/>
+            <column name="email"/>
+            <column name="department"/>
+        </index>
+    </table>    
+</schema>

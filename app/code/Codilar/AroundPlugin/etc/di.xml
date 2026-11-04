@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- Global scope: the storefront add-to-cart flow and any code calling Cart::addProduct(). -->
+    <type name="Magento\Checkout\Model\Cart">
+        <!-- Friendly message wraps outermost (10); the audit (20) sits inside and logs the ORIGINAL error. -->
+        <plugin name="codilar_around_plugin_friendly_stock_message"
+                type="Codilar\AroundPlugin\Plugin\FriendlyStockMessage"
+                sortOrder="10"/>
+        <plugin name="codilar_around_plugin_add_to_cart_audit"
+                type="Codilar\AroundPlugin\Plugin\AddToCartAudit"
+                sortOrder="20"/>
+    </type>
+
+    <!-- Dedicated log file: var/log/codilar_add_to_cart_audit.log -->
+    <virtualType name="Codilar\AroundPlugin\Logger\Handler" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/codilar_add_to_cart_audit.log</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Codilar\AroundPlugin\Logger\Logger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="name" xsi:type="string">codilarAddToCartAudit</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="system" xsi:type="object">Codilar\AroundPlugin\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Codilar\AroundPlugin\Plugin\AddToCartAudit">
+        <arguments>
+            <argument name="logger" xsi:type="object">Codilar\AroundPlugin\Logger\Logger</argument>
+        </arguments>
+    </type>
+
+</config>

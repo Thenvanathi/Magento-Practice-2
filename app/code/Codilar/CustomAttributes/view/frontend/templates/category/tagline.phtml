@@ -1,0 +1,10 @@
+<?php
+/**
+ * @var \Magento\Catalog\Block\Category\View $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+$tagline = (string)$block->getCurrentCategory()->getData('category_tagline');
+?>
+<?php if ($tagline !== ''): ?>
+    <p class="category-tagline"><?= $escaper->escapeHtml($tagline) ?></p>
+<?php endif; ?>

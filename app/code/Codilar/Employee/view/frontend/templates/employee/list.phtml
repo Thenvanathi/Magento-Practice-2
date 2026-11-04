@@ -1,0 +1,69 @@
+<?php
+declare(strict_types=1);
+
+use Codilar\Employee\ViewModel\EmployeeList;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+/** @var EmployeeList $viewModel */
+$viewModel = $block->getData('view_model');
+$employees = $viewModel->getEmployees();
+?>
+<div class="pb-16">
+    <form method="get" action="<?= $escaper->escapeUrl($block->getUrl('employees')) ?>"
+          class="flex flex-wrap items-end gap-3">
+        <div class="grow sm:max-w-sm">
+            <label for="employee-search" class="block text-sm font-semibold"><?= $escaper->escapeHtml(__('Search')) ?></label>
+            <input id="employee-search" type="search" name="q"
+                   value="<?= $escaper->escapeHtmlAttr($viewModel->getSearch()) ?>"
+                   placeholder="<?= $escaper->escapeHtmlAttr(__('Name or department')) ?>"
+                   class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2">
+        </div>
+        <div>
+            <label for="employee-department" class="block text-sm font-semibold"><?= $escaper->escapeHtml(__('Department')) ?></label>
+            <select id="employee-department" name="department"
+                    class="mt-1 rounded-lg border border-slate-300 px-3 py-2">
+                <option value=""><?= $escaper->escapeHtml(__('All departments')) ?></option>
+                <?php foreach ($viewModel->getDepartments() as $department): ?>
+                    <option value="<?= $escaper->escapeHtmlAttr($department) ?>"
+                        <?= $department === $viewModel->getSelectedDepartment() ? 'selected' : '' ?>>
+                        <?= $escaper->escapeHtml($department) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <button type="submit" class="rounded-full bg-primary px-6 py-2 font-semibold text-on-primary">
+            <?= $escaper->escapeHtml(__('Filter')) ?>
+        </button>
+        <a href="<?= $escaper->escapeUrl($block->getUrl('employees')) ?>" class="py-2 text-sm underline">
+            <?= $escaper->escapeHtml(__('Reset')) ?>
+        </a>
+    </form>
+
+    <?php if (!$employees): ?>
+        <p class="mt-10 text-slate-600"><?= $escaper->escapeHtml(__('No employees found.')) ?></p>
+    <?php else: ?>
+        <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <?php foreach ($employees as $employee): ?>
+                <?php
+                $first = (string)$employee->getData('first_name');
+                $last = (string)$employee->getData('last_name');
+                $initials = mb_strtoupper(mb_substr($first, 0, 1) . mb_substr($last, 0, 1));
+                ?>
+                <div class="flex items-center gap-4 rounded-2xl bg-slate-50 p-5">
+                    <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary font-semibold text-on-primary">
+                        <?= $escaper->escapeHtml($initials) ?>
+                    </div>
+                    <div>
+                        <p class="font-semibold"><?= $escaper->escapeHtml($first . ' ' . $last) ?></p>
+                        <p class="text-sm text-slate-600">
+                            <?= $escaper->escapeHtml($employee->getData('department') ?: __('No department')) ?>
+                        </p>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+</div>

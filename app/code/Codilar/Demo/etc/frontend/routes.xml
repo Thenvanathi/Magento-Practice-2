@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!-- Defines the URL prefix for this module. -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+
+    <router id="standard">
+        <!-- /demo/... URLs belong to Codilar_Demo. -->
+        <route id="demo" frontName="demo">
+            <module name="Codilar_Demo"/>
+        </route>
+    </router>
+
+</config>

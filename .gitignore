@@ -1,0 +1,21 @@
+# Secrets and environment-specific config
+/app/etc/env.php
+/auth.json
+
+# Generated / installed (rebuilt by composer, setup:di:compile, static-content:deploy)
+/vendor/
+/generated/
+/var/
+/pub/static/
+/pub/media/
+/phpserver/
+node_modules/
+
+# Local tooling
+/.idea/
+/.vscode/
+/.claude/
+/playwright/
+tests/e2e/test-results/
+tests/e2e/playwright-report/
+*.log

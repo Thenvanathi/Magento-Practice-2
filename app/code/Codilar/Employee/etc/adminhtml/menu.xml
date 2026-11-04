@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Codilar_Employee::codilar" title="Codilar" translate="title" module="Codilar_Employee"
+             sortOrder="70" resource="Codilar_Employee::codilar"/>
+        <add id="Codilar_Employee::employees" title="Employees" translate="title" module="Codilar_Employee"
+             sortOrder="10" parent="Codilar_Employee::codilar" action="codilar_employee/employee/index"
+             resource="Codilar_Employee::employees"/>
+        <add id="Codilar_Employee::employee_new" title="Add Employee" translate="title" module="Codilar_Employee"
+             sortOrder="20" parent="Codilar_Employee::codilar" action="codilar_employee/employee/newaction"
+             resource="Codilar_Employee::employee_new"/>
+    </menu>
+</config>

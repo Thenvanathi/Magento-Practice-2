@@ -1,0 +1,15 @@
+vendor/
+generated/
+var/
+pub/
+node_modules/
+lib/
+dev/
+setup/
+**/web/css/styles.css
+**/test-results/
+**/playwright-report/
+# Prettier has no PHP/phtml support without a plugin: PHP stays on .php-cs-fixer.dist.php.
+*.php
+*.phtml
+*.xml

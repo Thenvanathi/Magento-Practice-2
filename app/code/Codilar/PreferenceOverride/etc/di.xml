@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!--
+        Whenever Magento asks for the vendor Cart class, it gets our subclass instead.
+        Needed because the method we change is protected, so a plugin cannot reach it.
+    -->
+    <preference for="Magento\Checkout\Model\Cart"
+                type="Codilar\PreferenceOverride\Model\Cart"/>
+
+</config>
