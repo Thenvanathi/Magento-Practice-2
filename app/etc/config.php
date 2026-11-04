@@ -366,6 +366,7 @@ return [
         'Codilar_Demo' => 1,
         'Codilar_DemoData' => 0,
         'Codilar_Employee' => 1,
+        'Codilar_Homepage' => 1,
         'Codilar_OrderObserver' => 1,
         'Codilar_PreferenceOverride' => 1,
         'Codilar_PriceValidation' => 1,

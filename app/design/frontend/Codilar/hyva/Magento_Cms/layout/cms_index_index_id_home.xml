@@ -13,7 +13,11 @@
         <referenceBlock name="slider-2" remove="true"/>
         <referenceContainer name="content">
             <block name="codilar.homepage"
-                   template="Magento_Cms::home/homepage.phtml"/>
+                   template="Magento_Cms::home/homepage.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Codilar\Homepage\ViewModel\Homepage</argument>
+                </arguments>
+            </block>
         </referenceContainer>
     </body>
 </page>
